@@ -1,9 +1,8 @@
 export class Translate {
     static id = "29SurFsi3zdj";
-
+    static description = "Translates a text using a given personality";
     constructor() {
-        this.name = "Translate";
-        this.description = "Translates a text using a given personality";
+
     }
 
     start(text, personalityId, language, prompt, maxTokens) {
