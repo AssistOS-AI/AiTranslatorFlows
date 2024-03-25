@@ -5,17 +5,9 @@ export class Translate {
 
     }
 
-    start(text, personalityId, language, prompt, maxTokens) {
-        if (personalityId) {
-            let personality = system.space.getPersonality(personalityId);
-            this.prompt = `Please translate the following text: "${text}" in the following language: "${language}". ${prompt || ""}. You will play the role of this personality: "${personality.name}", which has the following characteristics: "${personality.description}". You will translate the given text in the style of the given personality. Return only the translated text.`;
-        } else {
-            this.prompt = `Please translate the following text: "${text}" in the following language: "${language}". ${prompt || ""}. Return only the translated text.`;
-        }
-
-        this.setDefaultValues();
-        this.setIntelligenceLevel(3);
-        this.execute(maxTokens);
+    async start(context, personality) {
+        this.prompt = `Please translate the following text: "${context.text}" in the following language: "${context.language}". ${context.prompt || ""}. You will play the role of this personality: "${personality.name}", which has the following characteristics: "${personality.description}". You will translate the given text in the style of the given personality. Return only the translated text.`;
+        await this.execute(context.maxTokens);
     }
 
     async execute(maxTokens) {
